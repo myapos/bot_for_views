@@ -1,15 +1,17 @@
 import * as utils from '../utils';
+import * as constants from '../constants';
+
 describe('Youtube', () => {
   let window_,
     video,
     interval = {},
-    counter = 0,
-    testCounter = 0;
+    counter = 0;
 
   beforeEach(() => {
+    // video = null;
     utils.setUIViewport();
     Cypress.config({
-      defaultCommandTimeout: 120000,
+      defaultCommandTimeout: 90000,
     });
     cy.window().then((win) => {
       // win.location.href = 'https://www.youtube.com/watch?v=UiRjz7rz978'; // krifes
@@ -24,35 +26,24 @@ describe('Youtube', () => {
     });
   });
 
-  it('should visit yt video 1 time', () => {
-    interval[counter] = setInterval(() => {
+  Cypress._.times(10, () => {
+    counter = counter + 1;
+    it(`${counter}---should visit yt video ${counter} time`, () => {
       let isPlaying = false;
-      utils.log(`waiting for video ${video}`);
-      if (video) {
-        utils.log('clearing interval');
-        utils.log(`muted: ${video.muted}`);
-        isPlaying = utils.isVideoPlaying(video);
-        utils.log(`is playing ${isPlaying}`);
-        video.muted = true;
-        clearInterval(interval[counter]);
-        utils.playAndMute({ window_, comments: false, video, counter });
-      }
-    }, 1000);
-  });
+      cy.wrap({ video: () => video }).should('exist');
+      utils.log(`muted: ${video.muted}`);
 
-  // it('should visit yt video 2 time', () => {
-  //   interval[counter] = setInterval(() => {
-  //     let isPlaying = false;
-  //     utils.log(`waiting for video ${video}`);
-  //     if (video) {
-  //       utils.log('clearing interval');
-  //       utils.log(`muted: ${video.muted}`);
-  //       isPlaying = utils.isVideoPlaying(video);
-  //       utils.log(`is playing ${isPlaying}`);
-  //       video.muted = true;
-  //       clearInterval(interval[counter]);
-  //       utils.playAndMute({ window_, comments: false, video, counter });
-  //     }
-  //   }, 1000);
-  // });
+      isPlaying = utils.isVideoPlaying(video);
+      utils.log(`is playing ${isPlaying}`);
+      video.muted = true;
+      utils.playAndMute({ window_, comments: false, video, counter });
+
+      // video duration should be at least greater than 30 secs
+      utils.log(`waiting for time to elapse ${video.currentTime}`);
+
+      cy.wrap({ currentTime: () => video.currentTime })
+        .invoke('currentTime')
+        .should('be.gt', constants.TIME_THRESHOLD + constants.TIME_OFFSET);
+    });
+  });
 });
