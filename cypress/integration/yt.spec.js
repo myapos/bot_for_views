@@ -1,25 +1,16 @@
-/// <reference types="cypress" />
-
-context('Navigation', () => {
+import * as utils from "../utils";
+describe('Navigation', () => {
     beforeEach(() => {
+      utils.setUIViewport();
       Cypress.config({
         defaultCommandTimeout: 30000,
       });
-      cy.visit('https://consent.youtube.com/m?continue=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DUiRjz7rz978&gl=GR&m=0&pc=yt&uxe=23983172&hl=el&src=1')
-      // cy.visit('https://www.youtube.com/watch?v=UiRjz7rz978')
+      cy.visit('https://accounts.google.com/signin/v2/identifier?service=mail&passive=true&rm=false&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&ss=1&scc=1&ltmpl=default&ltmplcache=2&emr=1&osid=1&flowName=GlifWebSignIn&flowEntry=ServiceLogin')
     })
   
     it('should visit yt video', () => {
-
-      cy.get('VfPpkd-vQzf8d').should("exist");
-      // cy.get('VfPpkd-vQzf8d').click());
-      //click()
-     // ytp-play-button ytp-button
-    //  cy.get("[class*='ytp-play-button ytp-button']").click();
-     
-     
-     // ytp-mute-button ytp-button
-    //  cy.get("[class*='ytp-mute-button ytp-button']").click();
+      utils.loginGmail();
+      // cy.contains('I agree').should('exist')
     })
 
   })
