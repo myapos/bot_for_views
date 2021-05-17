@@ -29,6 +29,13 @@ module.exports = (on, config) => {
       return launchOptions;
     }
 
+    on('task', {
+      log(message) {
+        console.log(message);
+        return null;
+      },
+    });
+
     // if (browser.name === "electron") {
     //   launchOptions.args["width"] = 1280;
     //   launchOptions.args["height"] = 1024;

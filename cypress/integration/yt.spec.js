@@ -1,6 +1,6 @@
 import * as utils from '../utils';
 describe('Youtube', () => {
-  let window_;
+  let window_, video, interval;
 
   beforeEach(() => {
     utils.setUIViewport();
@@ -12,14 +12,27 @@ describe('Youtube', () => {
       // win.location.href = 'https://www.youtube.com/'; //Will take you to Google.
       // win.location.href = 'https://www.youtube.com/watch?v=UiRjz7rz978'; //Will take you to Google.
       win.location.href = 'https://www.youtube.com/watch?v=PLhr5BLPJaw'; //Will take you to Google.
-
       window_ = win;
-      //https://www.youtube.com/watch?v=UiRjz7rz978
-      // win.location.href='https://accounts.google.com/signin'
+    });
+
+    cy.on('window:load', (win) => {
+      video = window_.document.getElementsByClassName(
+        'video-stream html5-main-video'
+      )[0];
+      console.log('------------->>>>> video', video);
+      cy.task('log', '------------->>>>> video', video);
+      // video.muted = true;
     });
   });
 
   it('should visit yt video', () => {
-    utils.playAndMute({ window_, comments: false });
+    interval = setInterval(() => {
+      console.log('waiting for video', video);
+      if (video) {
+        console.log('clearing interval');
+        clearInterval(interval);
+        utils.playAndMute({ window_, comments: false, video });
+      }
+    }, 1000);
   });
 });
