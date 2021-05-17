@@ -10,7 +10,9 @@ const playAndMute = ({ window_, comments, video, counter }) => {
   cy.get("[class*='ytp-play-button ytp-button']").should('exist');
   if (!isPlaying) {
     log('video was paused and will play');
-    cy.get("[class*='ytp-play-button ytp-button']").click();
+    debugger;
+    // cy.get("[class*='ytp-play-button ytp-button']").click();
+    video.play();
   }
 
   cy.get("[class*='ytp-mute-button ytp-button']").should('exist');

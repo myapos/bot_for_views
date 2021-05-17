@@ -4,7 +4,6 @@ import * as constants from '../constants';
 describe('Youtube', () => {
   let window_,
     video,
-    interval = {},
     counter = 0;
 
   beforeEach(() => {
@@ -26,7 +25,7 @@ describe('Youtube', () => {
     });
   });
 
-  Cypress._.times(10, () => {
+  Cypress._.times(constants.LOOPS, () => {
     counter = counter + 1;
     it(`${counter}---should visit yt video ${counter} time`, () => {
       let isPlaying = false;

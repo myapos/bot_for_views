@@ -35,14 +35,5 @@ module.exports = (on, config) => {
       // whatever you return here becomes the new launchOptions
       return launchOptions;
     }
-
-    // if (browser.name === "electron") {
-    //   launchOptions.args["width"] = 1280;
-    //   launchOptions.args["height"] = 1024;
-    //   launchOptions.args["resizable"] = false;
-
-    //   // whatever you return here becomes the new launchOptions
-    //   return launchOptions;
-    // }
   });
 };
