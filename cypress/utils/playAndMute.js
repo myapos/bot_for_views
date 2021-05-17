@@ -1,22 +1,31 @@
+import log from './log';
+import isVideoPlaying from './isVideoPlaying';
+
 const TIME_THRESHOLD = 30000;
 const TIME_OFFSET = 30000;
 const CHECK_EVERY = 1000;
-
-const playAndMute = ({ window_, comments, video }) => {
-  let interval;
+const playAndMute = ({ window_, comments, video, counter }) => {
+  let interval = {};
+  let isPlaying;
   let initialTime = video.currentTime;
+  isPlaying = isVideoPlaying(video);
 
   cy.get("[class*='ytp-play-button ytp-button']").should('exist');
-  cy.get("[class*='ytp-play-button ytp-button']").click();
-  cy.get("[class*='ytp-play-button ytp-button']").click();
+  if (!isPlaying) {
+    log('video was paused and will play');
+    cy.get("[class*='ytp-play-button ytp-button']").click();
+  }
 
   cy.get("[class*='ytp-mute-button ytp-button']").should('exist');
 
   if (!video.muted) {
     cy.get("[class*='ytp-mute-button ytp-button']").click();
+    log('video is not muted');
+  } else {
+    log('video is muted');
   }
 
-  console.log('video is muted', video.muted, ' initialTime', initialTime);
+  log(`initialTime ${initialTime}`);
 
   if (comments) {
     cy.contains('Sort by').should('exist');
@@ -26,16 +35,18 @@ const playAndMute = ({ window_, comments, video }) => {
 
   cy.scrollTo(0, 0);
 
-  interval = setInterval(() => {
+  interval[counter] = setInterval(() => {
     // it will leave the page after TIME_THRESHOLD of video are passed
 
-    console.log('interval', interval, ' current time', video.currentTime);
+    log(`interval ${interval[counter]}  current time ${video.currentTime}`);
 
     if (
       video.currentTime - initialTime >
       (TIME_THRESHOLD + TIME_OFFSET) / 1000
     ) {
-      clearInterval(interval);
+      log('navigating to google');
+
+      clearInterval(interval[counter]);
       window_.location.href = 'https://www.google.com'; //Will take you to Google.
     }
   }, CHECK_EVERY);
