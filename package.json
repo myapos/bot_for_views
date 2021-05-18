@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "cy:headed": "cypress run --headed --browser chrome ",
-    "cy:open": "cypress open ",
+    "cy:headed": "cypress run --headed --browser chromium",
+    "cy:open": "cypress open",
     "cy:headless": "cypress run --headless --browser chrome -"
   },
   "author": "",
