@@ -12,11 +12,12 @@ describe('Youtube', () => {
     // video = null;
     utils.setUIViewport();
     Cypress.config({
-      defaultCommandTimeout: 90000,
+      defaultCommandTimeout: 120000,
+      pageLoadTimeout: 240000,
     });
     cy.window().then((win) => {
       // win.location.href = 'https://www.youtube.com/watch?v=UiRjz7rz978'; // krifes
-      win.location.href = 'https://www.youtube.com/watch?v=PLhr5BLPJaw'; // sousta
+      win.location.href = 'https://www.youtube.com/watch?v=VBhOKdiwmN0'; // nauagos
       window_ = win;
     });
     cy.on('window:load', (win) => {
@@ -29,6 +30,8 @@ describe('Youtube', () => {
 
   Cypress._.times(constants.LOOPS, () => {
     counter = counter + 1;
+
+    const RANDOM_OFFSET = constants.generateRandomOffset();
     it(`${counter}---should visit yt video ${counter} time`, () => {
       let isPlaying = false;
       cy.wrap({ video: () => video }).should('exist');
@@ -44,7 +47,7 @@ describe('Youtube', () => {
 
       cy.wrap({ currentTime: () => video.currentTime })
         .invoke('currentTime')
-        .should('be.gt', constants.TIME_THRESHOLD + constants.TIME_OFFSET);
+        .should('be.gt', constants.TIME_THRESHOLD + RANDOM_OFFSET);
     });
   });
 });
