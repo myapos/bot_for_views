@@ -46,6 +46,9 @@ describe('Youtube', () => {
       utils.log(`waiting for time to elapse ${video.currentTime}`);
 
       utils.decreaseQuality();
+
+      utils.randomStops();
+
       cy.wrap({ currentTime: () => video.currentTime })
         .invoke('currentTime')
         .should('be.gt', constants.TIME_THRESHOLD + RANDOM_OFFSET);

@@ -4,6 +4,8 @@ import playAndMute from './playAndMute';
 import log from './log';
 import isVideoPlaying from './isVideoPlaying';
 import decreaseQuality from './decreaseQuality';
+import getRandomInt from './getRandomInt';
+import randomStops from './randomStops';
 
 export {
   setUIViewport,
@@ -12,4 +14,6 @@ export {
   log,
   isVideoPlaying,
   decreaseQuality,
+  getRandomInt,
+  randomStops,
 };
