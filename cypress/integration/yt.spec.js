@@ -45,6 +45,7 @@ describe('Youtube', () => {
       // video duration should be at least greater than 30 secs
       utils.log(`waiting for time to elapse ${video.currentTime}`);
 
+      utils.decreaseQuality();
       cy.wrap({ currentTime: () => video.currentTime })
         .invoke('currentTime')
         .should('be.gt', constants.TIME_THRESHOLD + RANDOM_OFFSET);
