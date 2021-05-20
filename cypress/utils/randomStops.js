@@ -15,7 +15,7 @@ const randomStops = () => {
 
       cy.get("[class*='ytp-play-button ytp-button']").should('exist');
       cy.get("[class*='ytp-play-button ytp-button']").click();
-      cy.wait(2000);
+      cy.wait(getRandomInt(5) * 1000);
       // wait for 500
       // play again
       log('will play the video again');
