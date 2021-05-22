@@ -1,5 +1,6 @@
 import setUIViewport from './setUIViewport';
 import loginGmail from './loginGmail';
+import loginDotVpn from './loginDotVpn';
 import playAndMute from './playAndMute';
 import log from './log';
 import isVideoPlaying from './isVideoPlaying';
@@ -10,6 +11,7 @@ import randomStops from './randomStops';
 export {
   setUIViewport,
   loginGmail,
+  loginDotVpn,
   playAndMute,
   log,
   isVideoPlaying,

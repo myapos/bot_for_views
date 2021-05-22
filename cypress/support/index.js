@@ -14,13 +14,19 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import './commands';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 
 Cypress.on('uncaught:exception', (err, runnable) => {
-// returning false here prevents Cypress from
-// failing the test
-return false
-})
+  // returning false here prevents Cypress from
+  // failing the test
+  return false;
+});
+
+Cypress.on('window:before:load', (win) => {
+  // this lets React DevTools "see" components inside application's iframe
+  win.__REACT_DEVTOOLS_GLOBAL_HOOK__ =
+    window.top.__REACT_DEVTOOLS_GLOBAL_HOOK__;
+});

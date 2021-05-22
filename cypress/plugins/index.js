@@ -1,3 +1,5 @@
+const path = require('path');
+
 /// <reference types="cypress" />
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
@@ -28,10 +30,40 @@ module.exports = (on, config) => {
   });
 
   on('before:browser:launch', (browser = {}, launchOptions) => {
-    if (browser.name === 'chrome') {
+    if (browser.family === 'chromium') {
       launchOptions.args.push('--disable-site-isolation-trials');
 
       console.log('------------------------>>>>>>>>> browser', browser);
+
+      // we could also restrict the extension
+      // to only load when "browser.isHeaded" is true
+
+      let extensionFolder = path.resolve(
+        __dirname,
+        '..',
+        '..',
+        './browser_extensions',
+        'react_dev_tools'
+      );
+
+      console.log('adding React DevTools extension from', extensionFolder);
+
+      launchOptions.extensions.push(extensionFolder);
+
+      extensionFolder = path.resolve(
+        __dirname,
+        '..',
+        '..',
+        './browser_extensions',
+        'redux_dev_tools'
+      );
+
+      console.log('adding Redux DevTools extension from', extensionFolder);
+
+      launchOptions.extensions.push(extensionFolder);
+
+      // console.log('launchOptions args', launchOptions.args);
+
       // whatever you return here becomes the new launchOptions
       return launchOptions;
     }
