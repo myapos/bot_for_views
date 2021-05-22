@@ -73,7 +73,7 @@ module.exports = (on, config) => {
 
       launchOptions.extensions.push(extensionFolder);
 
-      console.log('launchOptions args', launchOptions.args);
+      // console.log('launchOptions args', launchOptions.args);
 
       // whatever you return here becomes the new launchOptions
       return launchOptions;
