@@ -36,7 +36,7 @@ describe('VPN', () => {
   Cypress._.times(constants.LOOPS, () => {
     counter = counter + 1;
     const RANDOM_OFFSET = constants.generateRandomOffset();
-    it(`should use free vpn`, () => {
+    it(`${counter}---should use free vpn and watch video`, () => {
       const country = utils.selectRandomCountry();
 
       cy.contains(`${country}`).should('exist');
