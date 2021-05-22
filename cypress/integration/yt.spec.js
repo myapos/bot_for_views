@@ -9,6 +9,9 @@ describe('Youtube', () => {
   beforeEach(() => {
     cy.clearLocalStorage();
     cy.clearCookies(); // clear all cookies
+
+    // cy.clearExtensionStorage('local');
+
     // video = null;
     utils.setUIViewport();
     Cypress.config({
