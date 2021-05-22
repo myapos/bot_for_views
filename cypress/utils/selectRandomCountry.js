@@ -4,17 +4,17 @@ import log from './log';
 const RAND_THRESHOLD = 5;
 
 const COUNTRIES = {
-  1: 'Montreal',
-  2: 'Paris',
-  3: 'Chicago',
-  4: 'Los Angeles',
-  5: 'Seattle',
-  6: 'London',
+  0: 'Montreal',
+  1: 'Paris',
+  2: 'Chicago',
+  3: 'Los Angeles',
+  4: 'Seattle',
+  5: 'London',
 };
 
 const selectRandomCountry = () => {
   try {
-    const randInt = getRandomInt(6);
+    const randInt = getRandomInt(5);
 
     log(`Random country logs: randInt: ${randInt}`);
     log(`Country selected: ${COUNTRIES[randInt]}`);
