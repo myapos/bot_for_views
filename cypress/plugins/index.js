@@ -37,19 +37,8 @@ module.exports = (on, config) => {
 
       // we could also restrict the extension
       // to only load when "browser.isHeaded" is true
+
       let extensionFolder = path.resolve(
-        __dirname,
-        '..',
-        '..',
-        './browser_extensions',
-        'hola_extension'
-      );
-
-      console.log('adding hola extension from', extensionFolder);
-
-      launchOptions.extensions.push(extensionFolder);
-
-      extensionFolder = path.resolve(
         __dirname,
         '..',
         '..',
