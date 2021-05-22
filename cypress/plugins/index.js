@@ -62,6 +62,18 @@ module.exports = (on, config) => {
 
       launchOptions.extensions.push(extensionFolder);
 
+      extensionFolder = path.resolve(
+        __dirname,
+        '..',
+        '..',
+        './browser_extensions',
+        'free_vpn'
+      );
+
+      console.log('adding free vpn extension from', extensionFolder);
+
+      launchOptions.extensions.push(extensionFolder);
+
       // console.log('launchOptions args', launchOptions.args);
 
       // whatever you return here becomes the new launchOptions
