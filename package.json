@@ -7,13 +7,18 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "cy:headed": "cypress run --headed --browser chromium",
     "cy:open": "cypress open",
-    "cy:headless": "cypress run --headless --browser chrome -"
+    "cy:headless:fb": "cypress run --headless --spec cypress/integration/scan_fb_profiles.spec.js --browser chrome",
+    "cy:headless": "cypress run --headless --browser chrome",
+    "update:packages:ncu": "ncu -u && npm update && npm run clean:install",
+    "update:package": "ncu -u",
+    "ncu": "ncu"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^7.3.0",
+    "cypress": "^8.4.1",
     "eslint-plugin-cypress": "^2.11.3",
+    "npm-check-updates": "^11.8.5",
     "path": "^0.12.7",
     "prettier": "^2.3.0",
     "prettier-eslint": "^12.0.0"
