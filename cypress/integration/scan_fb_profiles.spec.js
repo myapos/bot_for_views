@@ -13,7 +13,7 @@ describe.only('Scan Facebook Profiles', () => {
 
   const STRATEGY = 1; // increase number for searching
   const BASE_STRATEGY = 8; // get num of digits of baseNumber
-  const wholeSecondPart = '10214187263809934';
+  const wholeSecondPart = '760959737407802'; //'10214187263809934';
 
   // working
   // const wholeSecondPart = '10214187263809933';
@@ -46,7 +46,7 @@ describe.only('Scan Facebook Profiles', () => {
   let minimizedRuns = 4;
   let maxChecks = 5;
   let testSuccess = false;
-  const stepCheck = 10;
+  const stepCheck = 10000;
 
   let start = remainingNumber;
   for (let index = start; index > start - stepCheck; index--) {
